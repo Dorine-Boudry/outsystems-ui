@@ -8,6 +8,7 @@ namespace OSFramework.OSUI.Patterns.MonthPicker {
 	 * @extends {Interface.IPattern}
 	 */
 	export interface IMonthPicker extends Interface.IPattern, Interface.IOpenable {
+		callProviderRedraw(): void;
 		clear(): void;
 		setLanguage(value: string): void;
 		setProviderConfigs(providerConfigs: ProviderConfigs): void;

@@ -392,37 +392,12 @@ namespace Providers.OSUI.MonthPicker.Flatpickr {
 		}
 
 		/**
-		 * Method used to change given propertyName at OnParametersChange platform event
+		 * Method used to call the provider redraw
 		 *
-		 * @param {string} propertyName the name of the property that will be changed
-		 * @param {unknown} propertyValue the new value that should be assigned to the given property name
 		 * @memberof Providers.OSUI.MonthPicker.Flatpickr.OSUIFlatpickrMonth
 		 */
-		public changeProperty(propertyName: string, propertyValue: unknown): void {
-			//Storing the current ExtendedClass, before possibly changing this property.
-			//This will enable us to remove the previous added classes to the element.
-			const oldExtendedClass = this.configs.ExtendedClass;
-
-			super.changeProperty(propertyName, propertyValue);
-
-			if (this.isBuilt) {
-				switch (propertyName) {
-					case OSFramework.OSUI.Patterns.MonthPicker.Enum.Properties.InitialMonth:
-					case OSFramework.OSUI.Patterns.MonthPicker.Enum.Properties.DateFormat:
-					case OSFramework.OSUI.Patterns.MonthPicker.Enum.Properties.MaxMonth:
-					case OSFramework.OSUI.Patterns.MonthPicker.Enum.Properties.MinMonth:
-						this.redraw();
-						break;
-					case OSFramework.OSUI.GlobalEnum.CommonPatternsProperties.ExtendedClass:
-						// Since Calendar element will be added dynamically by the library outside the pattern context
-						OSFramework.OSUI.Helper.Dom.Styles.ExtendedClass(
-							this.provider.calendarContainer,
-							oldExtendedClass,
-							propertyValue as string
-						);
-						break;
-				}
-			}
+		public callProviderRedraw(): void {
+			this.redraw();
 		}
 
 		/**

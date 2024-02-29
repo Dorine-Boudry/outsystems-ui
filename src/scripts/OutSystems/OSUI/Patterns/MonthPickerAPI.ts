@@ -172,6 +172,25 @@ namespace OutSystems.OSUI.Patterns.MonthPickerAPI {
 	}
 
 	/**
+	 * Function used to Redraw the monthpicker with the Given Id
+	 *
+	 * @param {string} monthPickerId ID of the MonthPickerItem that will be initialized.
+	 * @return {*}  {OSFramework.OSUI.Patterns.MonthPicker.IMonthPicker}
+	 */
+	export function Redraw(monthPickerId: string): string {
+		const result = OutSystems.OSUI.Utils.CreateApiResponse({
+			errorCode: ErrorCodes.MonthPicker.FailRedraw,
+			callback: () => {
+				const _MonthPickerItem = GetMonthPickerItemById(monthPickerId);
+
+				_MonthPickerItem.callProviderRedraw();
+			},
+		});
+
+		return result;
+	}
+
+	/**
 	 * Function to register a provider callback
 	 *
 	 * @export
