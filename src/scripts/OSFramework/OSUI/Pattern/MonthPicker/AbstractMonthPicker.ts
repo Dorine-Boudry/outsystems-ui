@@ -8,8 +8,7 @@ namespace OSFramework.OSUI.Patterns.MonthPicker {
 		constructor(uniqueId: string, configs: C) {
 			super(uniqueId, configs);
 		}
-
-		// Common methods that all Carousels must implement!
+		public abstract changeConfigs(newConfigs: JSON): void;
 		public abstract clear(): void;
 		public abstract close(): void;
 		public abstract open(): void;

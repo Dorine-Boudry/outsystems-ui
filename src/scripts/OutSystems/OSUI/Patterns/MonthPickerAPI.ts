@@ -11,6 +11,28 @@ namespace OutSystems.OSUI.Patterns.MonthPickerAPI {
 	 * @param {*} propertyValue Value that will be set to the property
 	 */
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types
+	export function ChangeConfigs(monthPickerId: string, newConfigs: JSON): string {
+		const result = OutSystems.OSUI.Utils.CreateApiResponse({
+			errorCode: ErrorCodes.MonthPicker.FailChangeProperty,
+			callback: () => {
+				const _monthPickerItem = GetMonthPickerItemById(monthPickerId);
+
+				_monthPickerItem.changeConfigs(newConfigs);
+			},
+		});
+
+		return result;
+	}
+
+	/**
+	 * Function that will change the property of a given MonthPicker Id.
+	 *
+	 * @export
+	 * @param {string} monthPickerId ID of the MonthPicker where the property will be changed.
+	 * @param {string} propertyName Property name that will be updated
+	 * @param {*} propertyValue Value that will be set to the property
+	 */
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types
 	export function ChangeProperty(monthPickerId: string, propertyName: string, propertyValue: any): string {
 		const result = OutSystems.OSUI.Utils.CreateApiResponse({
 			errorCode: ErrorCodes.MonthPicker.FailChangeProperty,

@@ -392,36 +392,40 @@ namespace Providers.OSUI.MonthPicker.Flatpickr {
 		}
 
 		/**
-		 * Method used to change given propertyName at OnParametersChange platform event
+		 * Method used to change pattern configs at OnParametersChange platform event
+		 * This is only for PoC purposes
 		 *
-		 * @param {string} propertyName the name of the property that will be changed
-		 * @param {unknown} propertyValue the new value that should be assigned to the given property name
+		 * @param {JSON} newConfigs the new configs to be applied on pattern
 		 * @memberof Providers.OSUI.MonthPicker.Flatpickr.OSUIFlatpickrMonth
 		 */
-		public changeProperty(propertyName: string, propertyValue: unknown): void {
-			//Storing the current ExtendedClass, before possibly changing this property.
-			//This will enable us to remove the previous added classes to the element.
+		public changeConfigs(newConfigs: JSON): void {
+			const configsToUpdate = JSON.parse(
+				OSFramework.OSUI.Helper.CheckConfigs(newConfigs, this.configs, this.configs.PatternConfigsRedraw)
+			);
 			const oldExtendedClass = this.configs.ExtendedClass;
 
-			super.changeProperty(propertyName, propertyValue);
+			// Call the changeProperty for each newConfigs
+			for (const configName in newConfigs) {
+				super.changeProperty(configName, newConfigs[configName]);
+			}
 
-			if (this.isBuilt) {
-				switch (propertyName) {
-					case OSFramework.OSUI.Patterns.MonthPicker.Enum.Properties.InitialMonth:
-					case OSFramework.OSUI.Patterns.MonthPicker.Enum.Properties.DateFormat:
-					case OSFramework.OSUI.Patterns.MonthPicker.Enum.Properties.MaxMonth:
-					case OSFramework.OSUI.Patterns.MonthPicker.Enum.Properties.MinMonth:
-						this.redraw();
-						break;
-					case OSFramework.OSUI.GlobalEnum.CommonPatternsProperties.ExtendedClass:
-						// Since Calendar element will be added dynamically by the library outside the pattern context
-						OSFramework.OSUI.Helper.Dom.Styles.ExtendedClass(
-							this.provider.calendarContainer,
-							oldExtendedClass,
-							propertyValue as string
-						);
-						break;
-				}
+			// Call the provider redraw, if a property was changed and needs a redraw
+			if (OSFramework.OSUI.Helper.PatternNeedsRedraw(configsToUpdate)) {
+				this.redraw();
+			}
+
+			// Check if extended class was changed and apply on pattern
+			if (
+				OSFramework.OSUI.Helper.ConfigNameExists(
+					configsToUpdate,
+					OSFramework.OSUI.GlobalEnum.CommonPatternsProperties.ExtendedClass
+				)
+			) {
+				OSFramework.OSUI.Helper.Dom.Styles.ExtendedClass(
+					this.provider.calendarContainer,
+					oldExtendedClass,
+					newConfigs[OSFramework.OSUI.GlobalEnum.CommonPatternsProperties.ExtendedClass] as string
+				);
 			}
 		}
 

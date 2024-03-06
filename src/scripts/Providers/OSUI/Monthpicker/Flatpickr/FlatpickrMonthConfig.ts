@@ -31,6 +31,13 @@ namespace Providers.OSUI.MonthPicker.Flatpickr {
 		constructor(config: JSON) {
 			super(config);
 
+			this.PatternConfigsRedraw = [
+				OSFramework.OSUI.Patterns.MonthPicker.Enum.Properties.DateFormat,
+				OSFramework.OSUI.Patterns.MonthPicker.Enum.Properties.InitialMonth,
+				OSFramework.OSUI.Patterns.MonthPicker.Enum.Properties.MaxMonth,
+				OSFramework.OSUI.Patterns.MonthPicker.Enum.Properties.MinMonth,
+			];
+
 			// Set the lang based on the language that has been defined already
 			this._lang = OSFramework.OSUI.Helper.Language.ShortLang;
 		}

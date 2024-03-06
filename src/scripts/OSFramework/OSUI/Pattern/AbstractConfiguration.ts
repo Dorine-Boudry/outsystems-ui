@@ -9,6 +9,7 @@ namespace OSFramework.OSUI.Patterns {
 	 */
 	export abstract class AbstractConfiguration {
 		public ExtendedClass: string;
+		public PatternConfigsRedraw: string[];
 
 		constructor(config: JSON) {
 			for (const key in config) {
