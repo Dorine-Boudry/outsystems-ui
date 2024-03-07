@@ -99,6 +99,12 @@ namespace OSFramework.OSUI.Patterns {
 			}
 		}
 
+		/**
+		 * Method used to cancel a redraw request
+		 *
+		 * @protected
+		 * @memberof AbstractProviderPattern
+		 */
 		protected cancelScheduledRedraw(): void {
 			if (this._patternRefreshRequest !== 0) {
 				clearTimeout(this._patternRefreshRequest);
@@ -128,6 +134,12 @@ namespace OSFramework.OSUI.Patterns {
 			}
 		}
 
+		/**
+		 * Method used to schedule a redraw
+		 *
+		 * @protected
+		 * @memberof AbstractProviderPattern
+		 */
 		protected scheduleRedraw(): void {
 			this.cancelScheduledRedraw();
 
