@@ -13,6 +13,7 @@ namespace OSFramework.OSUI.Patterns {
 		extends AbstractPattern<C>
 		implements Interface.IProviderPattern<P>
 	{
+		private _patternRefreshRequest: number;
 		// Holds the callback for the provider config applied event
 		private _platformEventProviderConfigsAppliedCallback: GlobalCallbacks.OSGeneric;
 		// Holds the provider
@@ -98,6 +99,14 @@ namespace OSFramework.OSUI.Patterns {
 			}
 		}
 
+		protected cancelScheduledRedraw(): void {
+			if (this._patternRefreshRequest !== 0) {
+				clearTimeout(this._patternRefreshRequest);
+				this._patternRefreshRequest = 0;
+			}
+			console.log('cancelScheduledRedraw method!!');
+		}
+
 		/**
 		 * Method that will be responsible to redraw pattern when needed
 		 *
@@ -114,7 +123,19 @@ namespace OSFramework.OSUI.Patterns {
 
 				// Trigger a new instance creation with updated configs
 				this.prepareConfigs();
+
+				console.log('redraw method!!');
 			}
+		}
+
+		protected scheduleRedraw(): void {
+			this.cancelScheduledRedraw();
+
+			this._patternRefreshRequest = window.setTimeout(() => {
+				this.redraw();
+			}, 0);
+
+			console.log('scheduleRedraw method!!');
 		}
 
 		/**

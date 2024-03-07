@@ -411,7 +411,7 @@ namespace Providers.OSUI.MonthPicker.Flatpickr {
 					case OSFramework.OSUI.Patterns.MonthPicker.Enum.Properties.DateFormat:
 					case OSFramework.OSUI.Patterns.MonthPicker.Enum.Properties.MaxMonth:
 					case OSFramework.OSUI.Patterns.MonthPicker.Enum.Properties.MinMonth:
-						this.redraw();
+						this.scheduleRedraw();
 						break;
 					case OSFramework.OSUI.GlobalEnum.CommonPatternsProperties.ExtendedClass:
 						// Since Calendar element will be added dynamically by the library outside the pattern context
