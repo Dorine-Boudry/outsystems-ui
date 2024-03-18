@@ -30,6 +30,8 @@ namespace OSFramework.OSUI.Helper {
 			}
 		}
 
+		console.log('CheckConfigs method!', updateConfigs);
+
 		return JSON.stringify(updateConfigs);
 	}
 

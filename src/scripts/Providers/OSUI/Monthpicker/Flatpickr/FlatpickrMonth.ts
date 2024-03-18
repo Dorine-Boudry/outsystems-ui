@@ -412,6 +412,7 @@ namespace Providers.OSUI.MonthPicker.Flatpickr {
 			// Call the provider redraw, if a property was changed and needs a redraw
 			if (OSFramework.OSUI.Helper.PatternNeedsRedraw(configsToUpdate)) {
 				this.redraw();
+				console.log('PatternNeedsRedraw!');
 			}
 
 			// Check if extended class was changed and apply on pattern
@@ -426,6 +427,7 @@ namespace Providers.OSUI.MonthPicker.Flatpickr {
 					oldExtendedClass,
 					newConfigs[OSFramework.OSUI.GlobalEnum.CommonPatternsProperties.ExtendedClass] as string
 				);
+				console.log('ConfigExists but no need redraw!');
 			}
 		}
 
