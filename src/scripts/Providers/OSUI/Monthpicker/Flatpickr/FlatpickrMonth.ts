@@ -398,6 +398,7 @@ namespace Providers.OSUI.MonthPicker.Flatpickr {
 		 */
 		public callProviderRedraw(): void {
 			this.redraw();
+			console.log('callProviderRedraw!!!');
 		}
 
 		/**
