@@ -8,6 +8,9 @@ namespace OSFramework.OSUI.Patterns.TabsHeaderItem {
 	 * @extends {AbstractConfiguration}
 	 */
 	export class TabsHeaderItemConfig extends AbstractConfiguration {
+		/** PUBLIC PROPERTIES **/
+		public TabItemName: string;
+		
 		constructor(config: JSON) {
 			super(config);
 		}
